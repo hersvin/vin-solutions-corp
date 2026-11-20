@@ -1,0 +1,65 @@
+.employee-directory { display: grid; gap: 1rem; min-width: 0; padding: clamp(.85rem, 1.8vw, 1.4rem); color: var(--color-text); }
+.employee-directory__heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.employee-eyebrow { margin: 0 0 .3rem; color: var(--color-text-muted); font-size: .67rem; font-weight: 700; letter-spacing: .09em; }
+.employee-directory__heading h2 { margin: 0; font: 700 1.35rem/1.3 var(--font-heading); }
+.employee-directory__heading p:last-child { margin: .3rem 0 0; color: var(--color-text-muted); font-size: .84rem; }
+.employee-sample-tag { flex: 0 0 auto; padding: .32rem .6rem; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text-muted); background: var(--color-surface); font-size: .68rem; font-weight: 600; }
+.employee-directory__filters { display: flex; align-items: center; gap: .6rem; }
+.employee-directory__filters label { min-width: 9rem; }
+.employee-directory__filters input, .employee-directory__filters select { width: 100%; min-height: 2.45rem; padding: .55rem .7rem; border: 1px solid var(--color-border); border-radius: 9px; color: var(--color-text); background: var(--color-surface); font: .76rem var(--font-body); }
+.employee-directory__filters .employee-search { width: min(20rem, 45vw); margin-right: auto; }
+.employee-result-count { color: var(--color-text-muted); font-size: .72rem; white-space: nowrap; }
+.employee-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; }
+.employee-card { display: grid; align-content: start; gap: .27rem; min-width: 0; padding: 1rem; border: 1px solid var(--color-border); border-radius: 14px; color: var(--color-text); background: var(--color-surface); box-shadow: var(--shadow); text-align: left; cursor: pointer; transition: border-color .16s ease, box-shadow .16s ease; }
+.employee-card:hover { border-color: var(--color-primary); box-shadow: 0 10px 26px color-mix(in srgb, var(--color-text) 12%, transparent); }
+.employee-card:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.employee-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: .7rem; margin-bottom: .3rem; }
+.employee-avatar { position: relative; display: inline-grid; width: 3.15rem; height: 3.15rem; flex: 0 0 auto; place-items: center; overflow: hidden; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-text); background: var(--color-accent); font: 700 .85rem var(--font-heading); }
+.employee-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.employee-avatar--large { width: 4.4rem; height: 4.4rem; font-size: 1.1rem; }
+.employee-status, .employee-benefit-status { display: inline-flex; align-items: center; padding: .22rem .5rem; border-radius: 999px; font-size: .63rem; font-weight: 700; white-space: nowrap; }
+.employee-status--active, .employee-benefit-status--enrolled { color: #275b46; background: #dcefe5; }
+.employee-status--on-leave, .employee-benefit-status--pending { color: #70452e; background: #f8e2d6; }
+.employee-status--separated { color: #475562; background: #e8edf0; }
+:root[data-theme="dark"] .employee-status--active, :root[data-theme="dark"] .employee-benefit-status--enrolled { color: #173a2b; background: #9ac9ae; }
+:root[data-theme="dark"] .employee-status--on-leave, :root[data-theme="dark"] .employee-benefit-status--pending { color: #402b25; background: #f4baa3; }
+:root[data-theme="dark"] .employee-status--separated { color: #20313b; background: #c4d7e0; }
+.employee-card__name { font: 700 .92rem var(--font-heading); }
+.employee-card__title, .employee-card__meta, .employee-card__branch { color: var(--color-text-muted); font-size: .72rem; }
+.employee-card__meta { margin-top: .15rem; }
+.employee-card__meta i { margin: 0 .15rem; font-style: normal; }
+.employee-card__branch { display: flex; justify-content: space-between; margin-top: .6rem; padding-top: .55rem; border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent); }
+.employee-card__branch b { color: var(--color-primary-hover); font-size: .95rem; }
+.employee-empty { padding: 2rem; border: 1px dashed var(--color-border); border-radius: 12px; color: var(--color-text-muted); text-align: center; }
+.employee-pagination { display: flex; align-items: center; justify-content: space-between; gap: .75rem; color: var(--color-text-muted); font-size: .7rem; }
+.employee-pagination > div { display: flex; align-items: center; gap: .6rem; }
+.employee-pagination button { padding: .42rem .65rem; border: 1px solid var(--color-border); border-radius: 7px; color: var(--color-text); background: var(--color-surface); font-size: .68rem; font-weight: 600; cursor: pointer; }
+.employee-pagination button:disabled { opacity: .45; cursor: not-allowed; }
+.employee-profile-scrim { position: fixed; z-index: 20; inset: 0; border: 0; background: rgb(16 30 39 / 36%); cursor: default; }
+.employee-profile-drawer { position: fixed; z-index: 21; top: 0; right: 0; display: flex; width: min(39rem, 100vw); height: 100dvh; flex-direction: column; border-left: 1px solid var(--color-border); background: var(--color-surface); box-shadow: -14px 0 40px rgb(16 30 39 / 18%); }
+.employee-profile-drawer__header { position: relative; flex: 0 0 auto; padding: 1rem 1.3rem 1.1rem; border-bottom: 1px solid var(--color-border); }
+.employee-profile-drawer__header > div:first-child { display: flex; justify-content: space-between; }
+.employee-profile-close { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text); background: var(--color-background); font-size: 1.2rem; cursor: pointer; }
+.employee-profile-identity { display: flex; align-items: center; gap: .85rem; margin: .6rem 0 .7rem; }
+.employee-profile-identity h2 { margin: 0; font: 700 1.15rem var(--font-heading); }
+.employee-profile-identity p { margin: .18rem 0; color: var(--color-text-muted); font-size: .78rem; }
+.employee-profile-identity div > span { color: var(--color-text-muted); font-size: .68rem; }
+.employee-profile-drawer__scroll { overflow-y: auto; padding: .2rem 1.3rem 2rem; }
+.employee-profile-section { padding: 1rem 0; border-bottom: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); }
+.employee-profile-section h3 { margin: 0 0 .65rem; font: 700 .85rem var(--font-heading); }
+.employee-profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem 1rem; margin: 0; }
+.employee-profile-grid div { min-width: 0; }
+.employee-profile-grid dt { color: var(--color-text-muted); font-size: .65rem; }
+.employee-profile-grid dd { margin: .13rem 0 0; font-size: .75rem; font-weight: 600; overflow-wrap: anywhere; }
+.employee-record-list { display: grid; gap: .55rem; }
+.employee-record-list article { display: grid; gap: .15rem; padding: .65rem .75rem; border-left: 2px solid var(--color-primary); border-radius: 0 8px 8px 0; background: var(--color-background); }
+.employee-record-list strong { font-size: .75rem; }
+.employee-record-list span, .employee-record-list small { color: var(--color-text-muted); font-size: .68rem; }
+.employee-benefits-list { display: grid; gap: .5rem; }
+.employee-benefits-list article { display: flex; align-items: center; justify-content: space-between; gap: .65rem; padding: .65rem .75rem; border: 1px solid var(--color-border); border-radius: 9px; }
+.employee-benefits-list article div { display: grid; gap: .15rem; }
+.employee-benefits-list strong { font-size: .74rem; }
+.employee-benefits-list article div span { color: var(--color-text-muted); font-size: .66rem; }
+.employee-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (max-width: 900px) { .employee-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .employee-directory__filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); } .employee-directory__filters .employee-search { grid-column: 1 / -1; width: 100%; margin: 0; } .employee-directory__filters label { min-width: 0; } .employee-result-count { grid-column: 1 / -1; } .employee-card-grid { grid-template-columns: 1fr; } .employee-card { padding: .85rem; } .employee-profile-drawer { border: 0; } .employee-profile-grid { grid-template-columns: 1fr; } .employee-pagination { align-items: flex-start; flex-direction: column; } .employee-pagination > div { width: 100%; justify-content: space-between; } }

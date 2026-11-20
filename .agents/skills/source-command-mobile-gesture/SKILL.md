@@ -1,0 +1,45 @@
+---
+name: "source-command-mobile-gesture"
+description: "Migrated source command `mobile-gesture`"
+---
+
+# source-command-mobile-gesture
+
+Use this skill when the user asks to run the migrated source command `mobile-gesture`.
+
+## Command Template
+
+# /mobile-gesture Command
+
+Builds fluid gesture handlers with reanimated worklets.
+
+---
+
+## 1. Identity & Execution
+
+- **Lead Agent:** Aragorn
+- **Specialist Agent:** mobile-rn-developer
+- **Category:** Frontend
+
+---
+
+## 2. Trigger Syntax
+
+```bash
+/mobile-gesture
+```
+
+---
+
+## 3. Workflow Protocol
+
+1. **Step 1:** Analyze target request and verify prerequisite context.
+2. **Step 2:** Execute Gesture Handler Builder protocol adhering strictly to domain rules.
+3. **Step 3:** Verify output against quality standards and pass verification.
+
+---
+
+## 4. Hard Verification Gates
+
+- Enforce strict type-safety and defensive boundary checks.
+- Verify zero regressions before completion.

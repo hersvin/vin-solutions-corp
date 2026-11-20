@@ -1,0 +1,45 @@
+---
+name: "source-command-graphql-schema"
+description: "Migrated source command `graphql-schema`"
+---
+
+# source-command-graphql-schema
+
+Use this skill when the user asks to run the migrated source command `graphql-schema`.
+
+## Command Template
+
+# /graphql-schema Command
+
+Builds typed GraphQL types, queries, and mutations.
+
+---
+
+## 1. Identity & Execution
+
+- **Lead Agent:** Gimli
+- **Specialist Agent:** graphql-architect
+- **Category:** Backend
+
+---
+
+## 2. Trigger Syntax
+
+```bash
+/graphql-schema <type-name>
+```
+
+---
+
+## 3. Workflow Protocol
+
+1. **Step 1:** Analyze target request and verify prerequisite context.
+2. **Step 2:** Execute GraphQL Schema & Resolver Builder protocol adhering strictly to domain rules.
+3. **Step 3:** Verify output against quality standards and pass verification.
+
+---
+
+## 4. Hard Verification Gates
+
+- Enforce strict type-safety and defensive boundary checks.
+- Verify zero regressions before completion.

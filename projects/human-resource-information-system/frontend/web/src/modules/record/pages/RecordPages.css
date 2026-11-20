@@ -1,0 +1,89 @@
+.record-page { position: relative; display: grid; gap: 1.25rem; padding: clamp(1rem, 2.4vw, 2rem); color: var(--color-text); }
+.record-page__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.record-eyebrow { margin: 0 0 .35rem; color: var(--color-text-muted); font-size: .7rem; font-weight: 700; letter-spacing: .09em; }
+.record-page h1 { margin: 0; font-family: var(--font-heading); font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 1.15; }
+.record-page__description { margin: .45rem 0 0; color: var(--color-text-muted); }
+.record-demo-label { flex: 0 0 auto; padding: .35rem .65rem; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text-muted); background: var(--color-surface); font-size: .72rem; font-weight: 600; }
+.record-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; }
+.record-stats--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.record-stats article { display: grid; gap: .18rem; min-width: 0; padding: 1rem 1.1rem; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.record-stats article > span, .record-stats small { color: var(--color-text-muted); font-size: .78rem; }
+.record-stats strong { font-family: var(--font-heading); font-size: 1.45rem; line-height: 1.4; }
+.record-table-card, .payslip-preview, .loan-detail { min-width: 0; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); box-shadow: var(--shadow); }
+.record-table-card { overflow: hidden; }
+.record-table-card__toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border-bottom: 1px solid var(--color-border); }
+.record-table-card__toolbar h2, .payslip-preview h2, .loan-detail h2 { margin: 0; font-family: var(--font-heading); font-size: 1.05rem; }
+.record-table-card__toolbar p { margin: .2rem 0 0; color: var(--color-text-muted); font-size: .8rem; }
+.record-search input { width: min(15rem, 40vw); padding: .6rem .75rem; border: 1px solid var(--color-border); border-radius: 9px; color: var(--color-text); background: var(--color-background); }
+.record-table-wrap { overflow-x: auto; }
+.record-table { width: 100%; border-collapse: collapse; text-align: left; font-size: .84rem; }
+.record-table th { padding: .7rem 1rem; color: var(--color-text-muted); background: var(--color-surface-muted); font-size: .7rem; font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
+.record-table td { padding: .8rem 1rem; border-top: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent); vertical-align: middle; }
+.record-table td strong, .record-table td small { display: block; }
+.record-table td small { margin-top: .15rem; color: var(--color-text-muted); font-size: .73rem; }
+.record-status { display: inline-flex; align-items: center; padding: .25rem .55rem; border-radius: 999px; font-size: .7rem; font-weight: 700; white-space: nowrap; }
+.record-status--present { color: #315e79; background: #e1eff3; }
+.record-status--late { color: #70452e; background: #f8e2d6; }
+.record-status--on-leave { color: var(--color-text-muted); background: var(--color-surface-muted); }
+:root[data-theme="dark"] .record-status--present { color: #dcecf4; background: #315e79; }
+:root[data-theme="dark"] .record-status--late { color: #3d2922; background: #f4baa3; }
+.record-link-button { padding: .35rem .6rem; border: 0; border-radius: 7px; color: var(--color-primary-hover); background: transparent; font-weight: 700; cursor: pointer; }
+.record-link-button:hover { background: var(--color-surface-muted); }
+.record-empty { padding: 1rem; text-align: center; color: var(--color-text-muted); }
+.record-detail { position: fixed; z-index: 5; top: 7rem; right: clamp(1rem, 3vw, 3rem); width: min(22rem, calc(100vw - 2rem)); padding: 1.25rem; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); box-shadow: 0 18px 48px rgb(20 40 50 / 22%); }
+.record-detail h2 { margin: 0 0 1rem; font: 700 1.1rem var(--font-heading); }
+.record-detail__close { float: right; padding: .35rem .55rem; border: 1px solid var(--color-border); border-radius: 7px; background: transparent; cursor: pointer; }
+.record-detail dl { display: grid; gap: .65rem; margin: 0; }
+.record-detail dl div { display: flex; justify-content: space-between; gap: 1rem; }
+.record-detail dt { color: var(--color-text-muted); }
+.record-detail dd { margin: 0; font-weight: 600; text-align: right; }
+.record-note { margin: 1rem 0 0; padding: .7rem; border-left: 3px solid var(--color-primary); border-radius: 4px; color: var(--color-text-muted); background: var(--color-surface-muted); font-size: .76rem; }
+.payslip-layout { display: grid; grid-template-columns: minmax(16rem, .75fr) minmax(0, 1.5fr); align-items: start; gap: 1rem; }
+.payslip-list { padding-bottom: .35rem; }
+.payslip-item { display: flex; width: 100%; align-items: center; gap: .7rem; padding: .85rem 1rem; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent); color: var(--color-text); background: transparent; text-align: left; cursor: pointer; }
+.payslip-item:last-child { border-bottom: 0; }
+.payslip-item:hover, .payslip-item--selected { background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface)); }
+.payslip-item__icon { display: grid; width: 2.25rem; height: 2.25rem; flex: 0 0 auto; place-items: center; border-radius: 10px; color: var(--color-text); background: var(--color-accent); font-weight: 700; }
+.payslip-item__text { display: grid; flex: 1; gap: .18rem; }
+.payslip-item__text strong { font-size: .78rem; }
+.payslip-item__text small { color: var(--color-text-muted); font-size: .7rem; }
+.payslip-preview { padding: 1.2rem; }
+.payslip-preview__header { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.payslip-preview__header > div > p:last-child { margin: .35rem 0 0; color: var(--color-text-muted); font-size: .8rem; }
+.payslip-net { display: grid; gap: .15rem; margin: 1.1rem 0; padding: 1rem; border-radius: 12px; color: var(--color-text); background: color-mix(in srgb, var(--color-primary) 17%, var(--color-surface)); }
+.payslip-net span, .payslip-net small { color: var(--color-text-muted); font-size: .75rem; }
+.payslip-net strong { font: 700 1.7rem var(--font-heading); }
+.payslip-breakdown { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.payslip-breakdown h3, .loan-detail h3 { margin: .2rem 0 .65rem; font: 700 .85rem var(--font-heading); }
+.payslip-breakdown p { display: flex; justify-content: space-between; gap: .5rem; margin: .48rem 0; color: var(--color-text-muted); font-size: .78rem; }
+.payslip-breakdown p strong { color: var(--color-text); font-weight: 600; white-space: nowrap; }
+.payslip-breakdown .payslip-breakdown__total { padding-top: .55rem; border-top: 1px solid var(--color-border); color: var(--color-text); font-weight: 700; }
+.payslip-actions { display: flex; justify-content: space-between; align-items: center; gap: .8rem; margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: .78rem; }
+.payslip-actions > div { display: flex; flex-wrap: wrap; gap: .45rem; }
+.payslip-actions button { padding: .5rem .8rem; border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text); background: var(--color-background); font-size: .75rem; font-weight: 700; cursor: pointer; }
+.payslip-actions button:hover:not(:disabled) { border-color: var(--color-primary); background: var(--color-surface-muted); }
+.payslip-actions button:disabled { opacity: .6; cursor: wait; }
+.record-error { color: #a33227; font-size: .8rem; }
+.loan-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(17rem, .8fr); align-items: start; gap: 1rem; }
+.loan-row { cursor: pointer; }
+.loan-row:hover, .loan-row--selected { background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface)); }
+.loan-row:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.loan-detail { padding: 1.1rem; }
+.loan-detail__provider { margin: .3rem 0 1rem; color: var(--color-text-muted); font-size: .78rem; }
+.loan-detail__balance { display: grid; gap: .15rem; padding: .8rem; border-radius: 11px; background: var(--color-surface-muted); }
+.loan-detail__balance span, .loan-detail__balance small { color: var(--color-text-muted); font-size: .72rem; }
+.loan-detail__balance strong { font: 700 1.35rem var(--font-heading); }
+.loan-detail h3 { margin-top: 1.1rem; }
+.loan-transactions { display: grid; }
+.loan-transaction { position: relative; display: grid; grid-template-columns: .65rem minmax(0, 1fr) auto; align-items: start; gap: .55rem; padding: .55rem 0; }
+.loan-transaction__marker { width: .55rem; height: .55rem; margin-top: .25rem; border-radius: 50%; background: var(--color-primary); }
+.loan-transaction__marker::after { position: absolute; top: 1.2rem; bottom: -.15rem; left: .25rem; width: 1px; background: var(--color-border); content: ""; }
+.loan-transaction:last-child .loan-transaction__marker::after { display: none; }
+.loan-transaction div { display: grid; gap: .15rem; }
+.loan-transaction strong, .loan-transaction b { font-size: .72rem; }
+.loan-transaction small { color: var(--color-text-muted); font-size: .66rem; }
+.loan-transaction b { white-space: nowrap; }
+.loan-transaction__release { color: var(--color-text-muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (max-width: 900px) { .record-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .payslip-layout, .loan-layout { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .record-page__header { align-items: flex-start; } .record-page { padding: 1rem; } .record-stats { gap: .55rem; } .record-stats article { padding: .75rem; } .record-stats strong { font-size: 1.2rem; } .record-table-card__toolbar { align-items: flex-start; flex-direction: column; } .record-search, .record-search input { width: 100%; } .payslip-breakdown { grid-template-columns: 1fr; gap: .8rem; } .payslip-actions { align-items: flex-start; flex-direction: column; } .record-demo-label { font-size: .65rem; } }

@@ -1,0 +1,60 @@
+import { useMemo, useState, type FormEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { EMPLOYEES, employeeAvatar } from "../data";
+import "./TaskBoard.css";
+
+type TaskStatus = "Backlog" | "To Do" | "In Progress" | "In Review" | "Done";
+type Priority = "Low" | "Medium" | "High";
+type Task = { id: string; title: string; description: string; assigneeId: string; dueDate: string; priority: Priority; status: TaskStatus; createdBy: string };
+const statuses: TaskStatus[] = ["Backlog", "To Do", "In Progress", "In Review", "Done"];
+const assignees = [{ id: "", name: "Unassigned" }, ...EMPLOYEES.map((employee) => ({ id: employee.id, name: employee.name }))];
+const initialTasks: Task[] = [
+  { id: "HR-104", title: "Review updated employee handbook", description: "Check policy references and send consolidated edits to People Operations.", assigneeId: "EMP-0248", dueDate: "2026-11-26", priority: "High", status: "Backlog", createdBy: "Mara Villanueva" },
+  { id: "HR-105", title: "Collect Q4 emergency contacts", description: "Follow up with employees whose emergency contacts need confirmation.", assigneeId: "EMP-0306", dueDate: "2026-11-28", priority: "Medium", status: "Backlog", createdBy: "Vin Santos" },
+  { id: "HR-098", title: "Prepare new hire orientation", description: "Confirm the room, onboarding checklist, and manager introductions.", assigneeId: "EMP-0306", dueDate: "2026-11-24", priority: "High", status: "To Do", createdBy: "Mara Villanueva" },
+  { id: "HR-099", title: "Update benefits enrollment guide", description: "Replace last year's dates and confirm plan contact details.", assigneeId: "EMP-0248", dueDate: "2026-11-30", priority: "Low", status: "To Do", createdBy: "Vin Santos" },
+  { id: "HR-091", title: "Reconcile employee master records", description: "Compare the directory with the latest signed employment records.", assigneeId: "EMP-0182", dueDate: "2026-11-22", priority: "High", status: "In Progress", createdBy: "Joel Ramirez" },
+  { id: "HR-093", title: "Prepare service anniversary list", description: "Verify upcoming anniversaries and confirm department assignment.", assigneeId: "EMP-0248", dueDate: "2026-11-25", priority: "Medium", status: "In Progress", createdBy: "Mara Villanueva" },
+  { id: "HR-087", title: "Confirm payroll cutoff checklist", description: "Review final checklist with payroll before the next cutoff.", assigneeId: "EMP-0182", dueDate: "2026-11-21", priority: "Medium", status: "In Review", createdBy: "Vin Santos" },
+  { id: "HR-076", title: "Archive signed policy acknowledgements", description: "File completed acknowledgements in each employee record.", assigneeId: "EMP-0248", dueDate: "2026-11-19", priority: "Low", status: "Done", createdBy: "Mara Villanueva" },
+];
+
+function assigneeName(id: string) { return assignees.find((person) => person.id === id)?.name ?? "Unassigned"; }
+
+function TaskDetails({ task, onClose }: { task: Task; onClose: () => void }) {
+  return <><motion.button className="task-detail-scrim" type="button" aria-label="Close task details" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}/><motion.aside className="task-detail-drawer" role="dialog" aria-modal="true" aria-labelledby="task-detail-title" initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 30, stiffness: 280 }}><header><div><p className="task-eyebrow">{task.id} / TASK</p><h2 id="task-detail-title">{task.title}</h2></div><button type="button" aria-label="Close task details" onClick={onClose}>×</button></header><div className="task-detail-drawer__body"><p className="task-detail-description">{task.description || "No description provided."}</p><dl><div><dt>Status</dt><dd>{task.status}</dd></div><div><dt>Priority</dt><dd><span className={`task-priority task-priority--${task.priority.toLowerCase()}`}>{task.priority}</span></dd></div><div><dt>Assignee</dt><dd>{assigneeName(task.assigneeId)}</dd></div><div><dt>Due date</dt><dd>{task.dueDate || "No due date"}</dd></div><div><dt>Created by</dt><dd>{task.createdBy}</dd></div></dl><p className="task-detail-note">Task records are sample data. Assignment and status changes stay in this browser session.</p></div></motion.aside></>;
+}
+
+export function TaskBoard() {
+  const [tasks, setTasks] = useState(initialTasks);
+  const [view, setView] = useState<"Board" | "List">("Board");
+  const [query, setQuery] = useState("");
+  const [showCreate, setShowCreate] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [draggedTask, setDraggedTask] = useState<string | null>(null);
+  const visibleTasks = useMemo(() => tasks.filter((task) => `${task.id} ${task.title} ${assigneeName(task.assigneeId)} ${task.status}`.toLowerCase().includes(query.trim().toLowerCase())), [tasks, query]);
+
+  function updateTask(id: string, updates: Partial<Task>) {
+    setTasks((current) => current.map((task) => task.id === id ? { ...task, ...updates } : task));
+    setSelectedTask((current) => current?.id === id ? { ...current, ...updates } : current);
+  }
+
+  function createTask(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const title = String(form.get("title") ?? "").trim();
+    if (!title) return;
+    const task: Task = { id: `HR-${Math.max(0, ...tasks.map((item) => Number(item.id.slice(3)) || 0)) + 1}`, title, description: String(form.get("description") ?? "").trim(), assigneeId: String(form.get("assignee") ?? ""), dueDate: String(form.get("dueDate") ?? ""), priority: String(form.get("priority") ?? "Medium") as Priority, status: String(form.get("status") ?? "Backlog") as TaskStatus, createdBy: "Vin Santos" };
+    setTasks((current) => [task, ...current]);
+    setShowCreate(false);
+    event.currentTarget.reset();
+  }
+
+  return <section className="task-management">
+    <header className="task-management__heading"><div><p className="task-eyebrow">EMPLOYEE MANAGEMENT / TASK MANAGEMENT</p><h2>Team tasks</h2><p>Plan work, assign an owner, and move tasks through the workflow.</p></div><button className="task-create-button" type="button" onClick={() => setShowCreate((open) => !open)}>{showCreate ? "Close form" : "+ New task"}</button></header>
+    {showCreate && <motion.form className="task-create-form" onSubmit={createTask} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}><div className="task-create-form__heading"><h3>Create a task</h3><p>Set a clear owner and next step.</p></div><label className="task-form-title">Task title<input name="title" maxLength={120} placeholder="For example, review employee handbook" required /></label><label className="task-form-description">Description<textarea name="description" rows={2} maxLength={500} placeholder="Add context or expected outcome" /></label><div className="task-form-grid"><label>Assignee<select name="assignee" defaultValue=""><option value="">Unassigned</option>{EMPLOYEES.map((employee) => <option key={employee.id} value={employee.id}>{employee.name}</option>)}</select></label><label>Due date<input name="dueDate" type="date" /></label><label>Priority<select name="priority" defaultValue="Medium"><option>Low</option><option>Medium</option><option>High</option></select></label><label>Status<select name="status" defaultValue="Backlog">{statuses.map((status) => <option key={status}>{status}</option>)}</select></label></div><div className="task-create-form__actions"><button type="button" onClick={() => setShowCreate(false)}>Cancel</button><button type="submit">Create task</button></div></motion.form>}
+    <div className="task-toolbar"><div className="task-view-switch" role="group" aria-label="Task view">{(["Board", "List"] as const).map((item) => <button key={item} type="button" aria-pressed={view === item} className={view === item ? "is-selected" : ""} onClick={() => setView(item)}>{item}</button>)}</div><label className="task-search"><span className="task-sr-only">Search tasks</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search tasks or assignee" /></label><span className="task-total-count">{visibleTasks.length} tasks</span></div>
+    {view === "Board" ? <div className="task-kanban" aria-label="Task Kanban board">{statuses.map((status) => { const columnTasks = visibleTasks.filter((task) => task.status === status); return <section className={`task-column task-column--${status.toLowerCase().replace(" ", "-")}`} key={status} onDragOver={(event) => event.preventDefault()} onDrop={() => { if (draggedTask) updateTask(draggedTask, { status }); setDraggedTask(null); }}><header className="task-column__heading"><h3>{status}</h3><span>{columnTasks.length}</span></header><div className="task-column__cards">{columnTasks.map((task) => { const employee = EMPLOYEES.find((person) => person.id === task.assigneeId); return <motion.article layout key={task.id} className="task-card" draggable onDragStart={() => setDraggedTask(task.id)} onDragEnd={() => setDraggedTask(null)}><div className="task-card__top"><span>{task.id}</span><span className={`task-priority task-priority--${task.priority.toLowerCase()}`}>{task.priority}</span></div><button className="task-card__title" type="button" onClick={() => setSelectedTask(task)}>{task.title}</button><p>{task.description}</p><div className="task-card__meta"><label><span className="task-sr-only">Status for {task.id}</span><select aria-label={`Status for ${task.id}`} value={task.status} onChange={(event) => updateTask(task.id, { status: event.target.value as TaskStatus })}>{statuses.map((item) => <option key={item}>{item}</option>)}</select></label><label className="task-assignee-select"><span className="task-sr-only">Assignee for {task.id}</span><select aria-label={`Assignee for ${task.id}`} value={task.assigneeId} onChange={(event) => updateTask(task.id, { assigneeId: event.target.value })}>{assignees.map((person) => <option key={person.id} value={person.id}>{person.name}</option>)}</select></label></div><div className="task-card__footer">{employee ? <span className="task-assignee"><img src={employeeAvatar(employee)} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }}/>{employee.name.split(" ")[0]}</span> : <span className="task-assignee task-assignee--empty">Unassigned</span>}<span>{task.dueDate ? new Date(`${task.dueDate}T12:00:00`).toLocaleDateString("en", { month: "short", day: "numeric" }) : "No due date"}</span></div></motion.article>; })}{columnTasks.length === 0 && <p className="task-column__empty">Drop a task here</p>}</div></section>; })}</div> : <div className="task-list-card"><div className="task-list-scroll"><table className="task-list-table"><thead><tr><th>Task</th><th>Assignee</th><th>Priority</th><th>Due date</th><th>Status</th></tr></thead><tbody>{visibleTasks.map((task) => <tr key={task.id}><td><button type="button" className="task-list-title" onClick={() => setSelectedTask(task)}><small>{task.id}</small><strong>{task.title}</strong></button></td><td><select aria-label={`Assignee for ${task.id}`} value={task.assigneeId} onChange={(event) => updateTask(task.id, { assigneeId: event.target.value })}>{assignees.map((person) => <option key={person.id} value={person.id}>{person.name}</option>)}</select></td><td><span className={`task-priority task-priority--${task.priority.toLowerCase()}`}>{task.priority}</span></td><td>{task.dueDate || "—"}</td><td><select className="task-status-select" aria-label={`Status for ${task.id}`} value={task.status} onChange={(event) => updateTask(task.id, { status: event.target.value as TaskStatus })}>{statuses.map((item) => <option key={item}>{item}</option>)}</select></td></tr>)}</tbody></table>{visibleTasks.length === 0 && <p className="task-no-results">No tasks match your search.</p>}</div></div>}
+    <AnimatePresence>{selectedTask && <TaskDetails task={selectedTask} onClose={() => setSelectedTask(null)} />}</AnimatePresence>
+  </section>;
+}

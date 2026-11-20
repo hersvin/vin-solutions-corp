@@ -1,0 +1,78 @@
+.app-shell {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.app-workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.themed-scrollbar,
+.sidebar-layout {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+.themed-scrollbar::-webkit-scrollbar,
+.sidebar-layout::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.themed-scrollbar::-webkit-scrollbar-track,
+.sidebar-layout::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.themed-scrollbar::-webkit-scrollbar-thumb,
+.sidebar-layout::-webkit-scrollbar-thumb {
+  min-height: 34px;
+  border: 2px solid var(--scrollbar-track);
+  border-radius: 999px;
+  background: var(--scrollbar-thumb);
+}
+
+.themed-scrollbar::-webkit-scrollbar-thumb:hover,
+.sidebar-layout::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.themed-scrollbar::-webkit-scrollbar-button,
+.sidebar-layout::-webkit-scrollbar-button,
+.themed-scrollbar::-webkit-scrollbar-button:single-button,
+.sidebar-layout::-webkit-scrollbar-button:single-button,
+.themed-scrollbar::-webkit-scrollbar-button:vertical:decrement,
+.themed-scrollbar::-webkit-scrollbar-button:vertical:increment,
+.sidebar-layout::-webkit-scrollbar-button:vertical:decrement,
+.sidebar-layout::-webkit-scrollbar-button:vertical:increment,
+.themed-scrollbar::-webkit-scrollbar-button:horizontal:decrement,
+.themed-scrollbar::-webkit-scrollbar-button:horizontal:increment,
+.sidebar-layout::-webkit-scrollbar-button:horizontal:decrement,
+.sidebar-layout::-webkit-scrollbar-button:horizontal:increment {
+  display: none;
+  width: 0;
+  height: 0;
+  appearance: none;
+  border: 0;
+  background: transparent;
+}

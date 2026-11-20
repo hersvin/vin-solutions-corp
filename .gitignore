@@ -1,0 +1,5 @@
+# Dependencies for every project and nested app
+**/node_modules/
+
+# Build output for every project and nested app
+**/dist/

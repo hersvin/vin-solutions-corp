@@ -1,0 +1,77 @@
+.module-page {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding: clamp(22px, 3vw, 42px);
+}
+
+.module-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 28px;
+  padding: 0;
+  color: var(--color-text-muted);
+  font-size: 0.76rem;
+  list-style: none;
+}
+
+.module-breadcrumb a { color: inherit; text-decoration: none; }
+.module-breadcrumb a:hover { color: var(--color-primary-hover); }
+.module-breadcrumb [aria-current="page"] { color: var(--color-text); font-weight: 650; }
+
+.module-page__header { margin-bottom: 26px; }
+.module-page__eyebrow {
+  margin: 0 0 8px;
+  color: var(--color-primary-hover);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.module-page__header h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  line-height: 1.15;
+}
+.module-page__header > p:last-child { margin: 10px 0 0; color: var(--color-text-muted); }
+
+.module-tabs { min-width: 0; margin-bottom: 24px; }
+.module-tabs__list {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--color-border);
+  scrollbar-width: thin;
+}
+.module-tabs__tab {
+  flex: 0 0 auto;
+  padding: 11px 13px;
+  border: 0;
+  border-radius: 9px 9px 0 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 620;
+  white-space: nowrap;
+}
+.module-tabs__tab[data-active] { color: var(--color-primary-hover); }
+.module-tabs__indicator {
+  position: absolute;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--color-primary);
+  transition: left 180ms ease, width 180ms ease;
+}
+.module-page__content { min-width: 0; }
+.module-page__loading { padding: 30px 0; color: var(--color-text-muted); }
+.module-page__notice { margin: -9px 0 20px; color: var(--color-text-muted); font-size: .72rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .module-tabs__indicator { transition: none; }
+}
